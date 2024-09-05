@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace WPF_Brickstore
 {
@@ -19,7 +20,7 @@ namespace WPF_Brickstore
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Items> legoBricks = new List<Items>();
+        ObservableCollection<Items> legoBricks = new ObservableCollection<Items>();
 
         public MainWindow()
         {
@@ -60,8 +61,9 @@ namespace WPF_Brickstore
                         legoBricks.Add(lego);
                     }
                 }
-
+                dgItems.ItemsSource = null;
                 dgItems.ItemsSource = legoBricks;
+                dgItems.Items.Refresh();
             }
         }
 

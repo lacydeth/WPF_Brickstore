@@ -18,6 +18,14 @@
         </Grid.RowDefinitions>
         <Button x:Name="btnImport" Width="150" Height="25" Content="Importálás (.bsx)" Click="btnImport_Click"></Button>
         <TextBox x:Name="tbSearch" Width="150" Height="25" Grid.Column="1"></TextBox>
-        <DataGrid AutoGenerateColumns="True" x:Name="dgItems" Grid.Row="1" Grid.ColumnSpan="3" Margin="15"></DataGrid>
+        <DataGrid x:Name="dgItems" AutoGenerateColumns="False" Grid.Row="2" Grid.ColumnSpan="3" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" />
+                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" />
+                <DataGridTextColumn Header="Category" Binding="{Binding CategoryName}" />
+                <DataGridTextColumn Header="Color" Binding="{Binding ColorName}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Qty}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
