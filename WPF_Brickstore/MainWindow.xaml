@@ -12,5 +12,12 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnImport" Width="150" Height="25" Content="Importálás (.bsx)" Click="btnImport_Click"></Button>
+        <TextBox x:Name="tbSearch" Width="150" Height="25" Grid.Column="1"></TextBox>
+        <DataGrid x:Name="dgItems" Grid.Row="1" Grid.ColumnSpan="3" Margin="15"></DataGrid>
     </Grid>
 </Window>

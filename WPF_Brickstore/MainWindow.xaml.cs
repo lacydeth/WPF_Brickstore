@@ -20,5 +20,10 @@ namespace WPF_Brickstore
         {
             InitializeComponent();
         }
+
+        private void btnImport_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
