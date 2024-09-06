@@ -43,29 +43,23 @@ namespace WPF_Brickstore
                 legoBricks.Clear();
                 foreach (var item in xaml.Descendants("Item"))
                 {
-                    var itemIdElement = item.Element("ItemId");
+                    var itemIdElement = item.Element("ItemID");
                     var itemNameElement = item.Element("ItemName");
                     var categoryNameElement = item.Element("CategoryName");
                     var colorNameElement = item.Element("ColorName");
                     var qtyElement = item.Element("Qty");
-
-                    if (itemIdElement != null && itemNameElement != null && categoryNameElement != null && colorNameElement != null && qtyElement != null)
-                    {
-                        Items lego = new Items(
-                            int.Parse(itemIdElement.Value),
-                            itemNameElement.Value,
-                            categoryNameElement.Value,
-                            colorNameElement.Value,
-                            int.Parse(qtyElement.Value)
-                        );
-                        legoBricks.Add(lego);
-                    }
+                    Items lego = new Items(
+                        itemIdElement.Value,
+                        itemNameElement.Value,
+                        categoryNameElement.Value,
+                        colorNameElement.Value,
+                        int.Parse(qtyElement.Value)
+                    );
+                    legoBricks.Add(lego);
                 }
-                dgItems.ItemsSource = null;
-                dgItems.ItemsSource = legoBricks;
-                dgItems.Items.Refresh();
             }
+            dgItems.ItemsSource = legoBricks;
+            dgItems.Items.Refresh();
         }
-
     }
 }
