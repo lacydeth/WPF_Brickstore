@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -17,13 +17,17 @@
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
         <Button x:Name="btnImport" Width="150" Height="25" Content="Importálás (.bsx)" Click="btnImport_Click"></Button>
-        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+        <StackPanel Margin="25 0 0 0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label Content="Szűrés névre:" HorizontalAlignment="Center"></Label>
             <TextBox x:Name="tbSearchName" Width="150" Height="25" Grid.Column="1" TextChanged="tbSearchName_TextChanged"></TextBox>
         </StackPanel>
-        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+        <StackPanel Margin="0 0 25 0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
             <Label Content="Szűrés azonosítóra:" HorizontalAlignment="Center"></Label>
-            <TextBox x:Name="tbSearchId" Width="150" Height="25"  Grid.Column="2"></TextBox>
+            <TextBox x:Name="tbSearchId" Width="150" Height="25"  Grid.Column="2" TextChanged="tbSearchId_TextChanged"></TextBox>
+        </StackPanel>
+        <StackPanel  Grid.Column="2" VerticalAlignment="Center">
+            <Label Content="Szűrés kategóriára:" HorizontalAlignment="Center"></Label>
+            <ComboBox x:Name="cbCategories"  Grid.Column="2" Width="150" Height="25" SelectionChanged="cbCategories_SelectionChanged"></ComboBox>
         </StackPanel>
         <DataGrid x:Name="dgItems" AutoGenerateColumns="False" Grid.Row="2" Grid.ColumnSpan="3" Margin="10">
             <DataGrid.Columns>

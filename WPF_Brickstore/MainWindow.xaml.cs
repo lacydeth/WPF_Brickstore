@@ -22,6 +22,7 @@ namespace WPF_Brickstore
     {
         ObservableCollection<Items> legoBricks = new ObservableCollection<Items>();
         ObservableCollection<Items> selectedLegoBricks = new ObservableCollection<Items>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -55,6 +56,10 @@ namespace WPF_Brickstore
                         colorNameElement.Value,
                         int.Parse(qtyElement.Value)
                     );
+                    if (!cbCategories.Items.Contains(lego.CategoryName))
+                    {
+                        cbCategories.Items.Add(lego.CategoryName);
+                    }
                     legoBricks.Add(lego);
                 }
             }
@@ -62,18 +67,43 @@ namespace WPF_Brickstore
             dgItems.Items.Refresh();
         }
 
-        private void tbSearchName_TextChanged(object sender, TextChangedEventArgs e)
+        private void FilterSearch()
         {
+            string searchName = tbSearchName.Text;
+            string searchId = tbSearchId.Text;
+            string selectedCategory = cbCategories.SelectedItem.ToString();
+
+            selectedLegoBricks.Clear();
             foreach (var item in legoBricks)
             {
-                if (item.ItemName.StartsWith(tbSearchName.Text))
+                bool matchName = string.IsNullOrEmpty(searchName) || item.ItemName.StartsWith(searchName);
+                bool matchId = string.IsNullOrEmpty(searchId) || item.ItemId.StartsWith(searchId);
+                bool matchCategory = string.IsNullOrEmpty(selectedCategory) || item.CategoryName == selectedCategory;
+
+                if (matchName && matchId && matchCategory)
                 {
                     selectedLegoBricks.Add(item);
                 }
             }
-            dgItems.ItemsSource = null;
-            dgItems.ItemsSource = selectedLegoBricks; 
+
+            dgItems.ItemsSource = selectedLegoBricks;
             dgItems.Items.Refresh();
         }
+
+        private void tbSearchName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterSearch();
+        }
+
+        private void tbSearchId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterSearch();
+        }
+
+        private void cbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterSearch();
+        }
+
     }
 }
