@@ -21,7 +21,7 @@ namespace WPF_Brickstore
     public partial class MainWindow : Window
     {
         ObservableCollection<Items> legoBricks = new ObservableCollection<Items>();
-
+        ObservableCollection<Items> selectedLegoBricks = new ObservableCollection<Items>();
         public MainWindow()
         {
             InitializeComponent();
@@ -59,6 +59,20 @@ namespace WPF_Brickstore
                 }
             }
             dgItems.ItemsSource = legoBricks;
+            dgItems.Items.Refresh();
+        }
+
+        private void tbSearchName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            foreach (var item in legoBricks)
+            {
+                if (item.ItemName.StartsWith(tbSearchName.Text))
+                {
+                    selectedLegoBricks.Add(item);
+                }
+            }
+            dgItems.ItemsSource = null;
+            dgItems.ItemsSource = selectedLegoBricks; 
             dgItems.Items.Refresh();
         }
     }
