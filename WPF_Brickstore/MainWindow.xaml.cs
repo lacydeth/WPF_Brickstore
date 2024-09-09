@@ -71,7 +71,7 @@ namespace WPF_Brickstore
         {
             string searchName = tbSearchName.Text;
             string searchId = tbSearchId.Text;
-            string selectedCategory = cbCategories.SelectedItem.ToString();
+            string selectedCategory = (string)cbCategories.SelectedItem;
 
             selectedLegoBricks.Clear();
             foreach (var item in legoBricks)
