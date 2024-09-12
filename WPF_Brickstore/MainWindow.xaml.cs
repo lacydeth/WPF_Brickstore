@@ -71,13 +71,14 @@ namespace WPF_Brickstore
         {
             string searchName = tbSearchName.Text;
             string searchId = tbSearchId.Text;
-            string selectedCategory = (string)cbCategories.SelectedItem;
+            string selectedCategory = (string)cbCategories.SelectedItem; 
 
             selectedLegoBricks.Clear();
+
             foreach (var item in legoBricks)
             {
-                bool matchName = string.IsNullOrEmpty(searchName) || item.ItemName.StartsWith(searchName);
-                bool matchId = string.IsNullOrEmpty(searchId) || item.ItemId.StartsWith(searchId);
+                bool matchName = string.IsNullOrEmpty(searchName) || item.ItemName.StartsWith(searchName, StringComparison.OrdinalIgnoreCase);
+                bool matchId = string.IsNullOrEmpty(searchId) || item.ItemId.StartsWith(searchId, StringComparison.OrdinalIgnoreCase);
                 bool matchCategory = string.IsNullOrEmpty(selectedCategory) || item.CategoryName == selectedCategory;
 
                 if (matchName && matchId && matchCategory)
@@ -86,9 +87,32 @@ namespace WPF_Brickstore
                 }
             }
 
+            var matchingCategories = selectedLegoBricks.Select(item => item.CategoryName).Distinct().ToList();
+
+            cbCategories.SelectionChanged -= cbCategories_SelectionChanged;
+            cbCategories.Items.Clear();
+            cbCategories.Items.Add("");
+
+            foreach (var category in matchingCategories)
+            {
+                cbCategories.Items.Add(category);
+            }
+
+            if (matchingCategories.Contains(selectedCategory))
+            {
+                cbCategories.SelectedItem = selectedCategory;
+            }
+            else
+            {
+                cbCategories.SelectedItem = ""; 
+            }
+
+            cbCategories.SelectionChanged += cbCategories_SelectionChanged; 
+
             dgItems.ItemsSource = selectedLegoBricks;
             dgItems.Items.Refresh();
         }
+
 
         private void tbSearchName_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -105,5 +129,9 @@ namespace WPF_Brickstore
             FilterSearch();
         }
 
+        private void cbFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

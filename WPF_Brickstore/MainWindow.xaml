@@ -16,7 +16,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button x:Name="btnImport" Width="150" Height="25" Content="Importálás (.bsx)" Click="btnImport_Click"></Button>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"> 
+            <Button Margin="5" x:Name="btnImport" Width="150" Height="25" Content="Mappa importálása" Click="btnImport_Click"></Button>
+            <ComboBox x:Name="cbFiles" Width="150" Height="25" SelectionChanged="cbFiles_SelectionChanged"></ComboBox>
+        </StackPanel>
         <StackPanel Margin="25 0 0 0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label Content="Szűrés névre:" HorizontalAlignment="Center"></Label>
             <TextBox x:Name="tbSearchName" Width="150" Height="25" Grid.Column="1" TextChanged="tbSearchName_TextChanged"></TextBox>
